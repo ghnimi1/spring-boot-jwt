@@ -9,10 +9,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,6 +28,22 @@ public class AuthController {
     private UserRepository userRepository;
     @Autowired
     private JwtUtil jwtUtil;
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = users.stream()
+                .map(user -> convertToDto(user))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userDtos);
+    }
+
+    private UserDto convertToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setRoles(user.getRoles());
+        return userDto;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
@@ -54,6 +71,7 @@ public class AuthController {
         User newUser = new User();
         newUser.setUsername(registrationRequest.getUsername());
         newUser.setPassword(new BCryptPasswordEncoder().encode(registrationRequest.getPassword()));
+        newUser.setRoles(Collections.singleton(Role.ROLE_USER));
 
         userRepository.save(newUser);
 
