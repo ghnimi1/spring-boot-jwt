@@ -1,4 +1,4 @@
-package com.example.formationtcf.user;
+package com.example.formationtcf.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

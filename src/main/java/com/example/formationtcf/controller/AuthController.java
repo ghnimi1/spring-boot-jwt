@@ -1,5 +1,13 @@
-package com.example.formationtcf.user;
+package com.example.formationtcf.controller;
 
+import com.example.formationtcf.dto.AuthenticationRequest;
+import com.example.formationtcf.dto.AuthenticationResponse;
+import com.example.formationtcf.dto.RegistrationRequest;
+import com.example.formationtcf.dto.UserDto;
+import com.example.formationtcf.model.Role;
+import com.example.formationtcf.model.User;
+import com.example.formationtcf.repository.UserRepository;
+import com.example.formationtcf.service.UserDetailsServiceImpl;
 import com.example.formationtcf.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

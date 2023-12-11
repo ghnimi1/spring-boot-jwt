@@ -1,7 +1,7 @@
 package com.example.formationtcf.config;
 
 import com.example.formationtcf.filters.JwtAuthenticationFilter;
-import com.example.formationtcf.user.UserDetailsServiceImpl;
+import com.example.formationtcf.service.UserDetailsServiceImpl;
 import com.example.formationtcf.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

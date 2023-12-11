@@ -1,4 +1,4 @@
-package com.example.formationtcf.user;
+package com.example.formationtcf.dto;
 
 import lombok.*;
 
