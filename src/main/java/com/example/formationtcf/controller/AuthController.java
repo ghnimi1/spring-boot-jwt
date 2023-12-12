@@ -49,6 +49,7 @@ public class AuthController {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
         userDto.setRoles(user.getRoles());
         return userDto;
     }
@@ -58,13 +59,13 @@ public class AuthController {
             throws Exception {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
         final String jwt = jwtUtil.generateToken(userDetails);
 
@@ -72,12 +73,13 @@ public class AuthController {
     }
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest registrationRequest) throws Exception {
-        if (userRepository.findByUsername(registrationRequest.getUsername()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
+        if (userRepository.findByEmail(registrationRequest.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
 
         User newUser = new User();
         newUser.setUsername(registrationRequest.getUsername());
+        newUser.setEmail(registrationRequest.getEmail());
         newUser.setPassword(new BCryptPasswordEncoder().encode(registrationRequest.getPassword()));
         newUser.setRoles(Collections.singleton(Role.ROLE_USER));
 
