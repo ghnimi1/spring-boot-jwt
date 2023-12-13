@@ -49,6 +49,7 @@ public class AuthController {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
+        userDto.setPhone(user.getPhone());
         userDto.setEmail(user.getEmail());
         userDto.setRoles(user.getRoles());
         return userDto;
@@ -79,6 +80,7 @@ public class AuthController {
 
         User newUser = new User();
         newUser.setUsername(registrationRequest.getUsername());
+        newUser.setPhone(registrationRequest.getPhone());
         newUser.setEmail(registrationRequest.getEmail());
         newUser.setPassword(new BCryptPasswordEncoder().encode(registrationRequest.getPassword()));
         newUser.setRoles(Collections.singleton(Role.ROLE_USER));

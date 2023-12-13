@@ -25,6 +25,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    private String phone;
     private String email;
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)
