@@ -23,7 +23,7 @@ public class Test {
     private String text;
     private String type;
     private String question;
-    private String choix;
+    //private String choix;
     private String response;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
