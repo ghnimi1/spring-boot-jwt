@@ -1,7 +1,5 @@
 package com.example.formationtcf.dto;
-
 import lombok.*;
-
 @Data
 @Builder
 @Getter
