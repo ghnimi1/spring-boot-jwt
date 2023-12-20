@@ -1,8 +1,10 @@
 package com.example.formationtcf.service;
 
+import com.example.formationtcf.dto.TestDto;
 import com.example.formationtcf.model.Test;
 import com.example.formationtcf.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,18 +12,13 @@ import java.util.List;
 @Service
 public class TestService {
     @Autowired
-    private final TestRepository testRepository ;
+    private TestRepository testRepository;
 
-    @Autowired
-    public TestService(TestRepository quizRepository) {
-        this.testRepository = quizRepository;
+    public ResponseEntity<?> createTest(TestDto testDTO) {
+       return  ResponseEntity.ok("Created test successfully");
     }
 
-    public void saveTest(Test test) {
-        testRepository.saveTest(test);
-    }
-
-    public List<Test> getAllTests() {
-        return testRepository.getAllTests();
+    public ResponseEntity<?> getTest(Long id) {
+        return ResponseEntity.ok("get One test successfully");
     }
 }
