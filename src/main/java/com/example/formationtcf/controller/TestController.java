@@ -16,10 +16,9 @@ public class TestController {
     private TestService testService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTest(@RequestBody String name)  throws Exception{
+    public ResponseEntity<?> createTest(@RequestBody String testDTO)  throws Exception{
         //testService.createTest(testDTO);
-        System.out.println("In here");
-        return ResponseEntity.ok(name);
+        return ResponseEntity.ok("Test created successfully!");
     }
 
     @GetMapping("/{id}")
