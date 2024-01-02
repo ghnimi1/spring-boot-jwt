@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/tests")
 public class TestController {
@@ -24,3 +23,10 @@ public class TestController {
         return new TestDto();
     }
 }
+/*
+    @GetMapping("/{id}")
+    public TestDto getTest(@PathVariable Long id) {
+        return new TestDto();
+    }
+}
+*/
